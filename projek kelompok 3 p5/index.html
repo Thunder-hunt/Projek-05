@@ -3,25 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jelajahi keindahan seni wayang Indonesia - warisan budaya yang menakjubkan">
+    <meta name="keywords" content="wayang, wayang kulit, wayang golek, budaya indonesia, seni tradisional">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <title>Wayang Indonesia</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <!-- Tambahkan Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="preloader">
+        <div class="loader">
+            <div class="wayang-loader"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
     <nav>
         <div class="nav-container">
             <div class="logo">Pesona Wayang</div>
             <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
+                <span></span>
             </div>
             <ul class="nav-links">
-                <li><a href="#beranda">Beranda</a></li>
-                <li><a href="#jenis-wayang">Jenis Wayang</a></li>
-                <li><a href="#galeri">Galeri</a></li>
-                <li><a href="#sejarah">Sejarah</a></li>
-                <li><a href="#kontak">Kontak</a></li>
+                <li style="--i:1"><a href="#beranda">Beranda</a></li>
+                <li style="--i:2"><a href="#jenis-wayang">Jenis Wayang</a></li>
+                <li style="--i:3"><a href="#galeri">Galeri</a></li>
+                <li style="--i:4"><a href="#sejarah">Sejarah</a></li>
+                <li style="--i:5"><a href="#kontak">Kontak</a></li>
             </ul>
         </div>
     </nav>
@@ -34,7 +44,7 @@
         </div>
         <div class="hero-content">
             <h1 data-aos="fade-up">Warisan Budaya Wayang Indonesia</h1>
-            <p data-aos="fade-up" data-aos-delay="200">Jelajahi keindahan dan filosofi seni wayang tradisional</p>
+            <!-- <p data-aos="fade-up" data-aos-delay="200">Jelajahi keindahan dan filosofi seni wayang tradisional</p> -->
             <a href="#jenis-wayang" class="cta-button" data-aos="fade-up" data-aos-delay="400">Mulai Eksplorasi</a>
         </div>
     </header>
@@ -170,6 +180,10 @@
             <p>&copy; 2025 Kelompok 3. All rights reserved.</p>
         </div>
     </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="script.js"></script>

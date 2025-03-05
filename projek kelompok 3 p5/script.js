@@ -54,18 +54,9 @@ window.addEventListener('resize', loadResponsiveImages);
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        const headerOffset = 80;
-        const elementPosition = target.offsetTop;
-        const offsetPosition = elementPosition - headerOffset;
-
-        window.scrollTo({
-            top: offsetPosition,
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
         });
-        
-        // Close mobile menu after clicking
-        navLinks.classList.remove('active');
     });
 });
 
@@ -168,4 +159,107 @@ window.addEventListener('scroll', () => {
         const speed = 0.05;
         element.style.transform = `translateY(${scrolled * speed}px)`;
     });
+});
+
+const wayangData = {
+    'Wayang Kulit': {
+        images: [
+            'img/wayang kulit.jpg',
+            'img/wayang kulit1.jpg',
+            'img/wayang kulit2.jpg'
+        ],
+        description: `Wayang kulit adalah seni pertunjukan tradisional yang menggunakan boneka pipih yang terbuat dari kulit sapi atau kerbau yang diukir dengan sangat detail. Pertunjukan wayang kulit diiringi dengan gamelan dan dilakukan oleh seorang dalang yang memainkan wayang di balik layar putih yang diterangi lampu.`,
+        origins: [
+            'Jawa Tengah - Gaya Surakarta',
+            'Yogyakarta - Gaya Mataraman',
+            'Jawa Timur - Gaya Jawa Timuran',
+            'Bali - Wayang Kulit Bali'
+        ]
+    },
+    'Wayang Golek': {
+        images: [
+            'img/wayang golek.jpg',
+            'img/wayang golek1.jpg',
+            'img/wayang golek2.jpg'
+        ],
+        description: `Wayang golek adalah boneka kayu tiga dimensi yang digerakkan dengan tongkat. Setiap boneka memiliki karakteristik wajah dan kostum yang unik. Pertunjukan wayang golek biasanya menceritakan kisah-kisah epik Ramayana dan Mahabharata serta cerita-cerita lokal.`,
+        origins: [
+            'Jawa Barat - Gaya Sunda',
+            'Bogor - Wayang Golek Bogor',
+            'Cirebon - Wayang Golek Cirebon'
+        ]
+    },
+    'Wayang Orang': {
+        images: [
+            'img/wayang orang.jpg',
+            'img/wayang orang1.jpg',
+            'img/wayang orang2.jpg'
+        ],
+        description: `Wayang orang adalah pertunjukan teater tradisional yang menggabungkan tarian, drama, dan musik. Para pemain mengenakan kostum dan riasan yang menggambarkan karakter-karakter dalam cerita wayang. Pertunjukan ini diiringi gamelan dan menggunakan bahasa Jawa.`,
+        origins: [
+            'Surakarta - Wayang Orang Sriwedari',
+            'Yogyakarta - Wayang Wong Gaya Yogyakarta',
+            'Jakarta - Wayang Orang Bharata'
+        ]
+    }
+};
+
+// Modal elements
+const modal = document.getElementById('wayangModal');
+const modalMainImage = document.getElementById('modalMainImage');
+const modalThumbnails = document.getElementById('modalThumbnails');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const modalOrigins = document.getElementById('modalOrigins');
+
+// Add click event to wayang cards
+document.querySelectorAll('.wayang-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const title = card.querySelector('h3').textContent;
+        const data = wayangData[title];
+        
+        modalTitle.textContent = title;
+        modalDescription.textContent = data.description;
+        modalMainImage.src = data.images[0];
+        modalMainImage.alt = title;
+        
+        // Create thumbnails
+        modalThumbnails.innerHTML = data.images.map((src, index) => `
+            <img src="${src}" 
+                alt="${title} ${index + 1}" 
+                class="thumbnail ${index === 0 ? 'active' : ''}"
+                onclick="changeMainImage(this.src, this)"
+            >`
+        ).join('');
+        
+        // Create origin list
+        modalOrigins.innerHTML = data.origins.map(origin => 
+            `<li>${origin}</li>`
+        ).join('');
+        
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+// Change main image function
+function changeMainImage(src, thumbnail) {
+    modalMainImage.src = src;
+    document.querySelectorAll('.thumbnail').forEach(thumb => 
+        thumb.classList.remove('active')
+    );
+    thumbnail.classList.add('active');
+}
+
+// Close modal functionality
+document.querySelector('.close-modal').addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 });
